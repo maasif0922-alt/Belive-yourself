@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Master Admin Dashboard — Believe Yourself</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* Admin Global Layout */
+    :root {
+      --admin-sidebar: 280px;
+      --admin-bg: #f1f5f9;
+      --admin-surface: #ffffff;
+      --admin-text: #334155;
+      --admin-primary: #f97316; /* Orange */
+      --admin-accent: #0ea5e9; /* Light blue */
+      --admin-dark: #0f172a; /* Slate 900 */
+    }
+    body {
+      background: var(--admin-bg);
+      color: var(--admin-text);
+      font-family: var(--font-body);
+      margin: 0;
+      padding: 0;
+    }
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Dark Premium Sidebar */
+    .admin-sidebar {
+      width: var(--admin-sidebar);
+      background: var(--admin-dark);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    .admin-brand {
+      padding: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .admin-brand-icon {
+      width: 40px; height: 40px;
+      background: var(--gradient-orange);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .admin-brand-text {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+    }
+    .admin-nav {
+      padding: 20px 12px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .admin-nav-group {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.4);
+      margin: 20px 0 10px 12px;
+      font-weight: 600;
+    }
+    .admin-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.2s;
+      margin-bottom: 4px;
+    }
+    .admin-link:hover {
+      background: rgba(255,255,255,0.05);
+      color: white;
+    }
+    .admin-link.active {
+      background: var(--admin-primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+    .admin-link .icon {
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+    .badge {
+      margin-left: auto;
+      background: #ef4444;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    /* Main Content */
+    .admin-main {
+      flex: 1;
+      margin-left: var(--admin-sidebar);
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-header {
+      height: 70px;
+      background: var(--admin-surface);
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+    }
+    .admin-search {
+      display: flex;
+      align-items: center;
+      background: var(--admin-bg);
+      border-radius: 20px;
+      padding: 8px 16px;
+      width: 300px;
+    }
+    .admin-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      margin-left: 8px;
+      font-family: var(--font-body);
+    }
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .admin-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--admin-dark);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold;
+    }
+    
+    .admin-content {
+      padding: 32px;
+    }
+    .page-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--admin-dark);
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    /* Grid Layouts */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--admin-surface);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #64748b;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .stat-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .icon-blue { background: #e0f2fe; color: #0284c7; }
+    .icon-green { background: #dcfce7; color: #16a34a; }
+    .icon-orange { background: #ffedd5; color: #ea580c; }
+    .icon-purple { background: #f3e8ff; color: #9333ea; }
+    
+    .stat-value {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--admin-dark);
+    }
+    .stat-trend {
+      font-size: 0.85rem;
+      margin-top: 8px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .trend-up { color: #16a34a; }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    .panel {
+      background: var(--admin-surface);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .panel-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--admin-dark);
+      margin: 0;
+    }
+    .panel-body {
+      padding: 0;
+    }
+    
+    /* Tables */
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .admin-table th {
+      background: #f8fafc;
+      padding: 12px 24px;
+      text-align: left;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      font-weight: 600;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .admin-table td {
+      padding: 16px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+    .admin-table tr:hover {
+      background: #f8fafc;
+    }
+    .store-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .store-logo {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold;
+      color: #64748b;
+    }
+    
+    /* Notifications */
+    .notification-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .notif-item {
+      padding: 16px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .notif-item:last-child { border-bottom: none; }
+    .notif-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+    .notif-blue { background: #e0f2fe; color: #0284c7; }
+    .notif-orange { background: #ffedd5; color: #ea580c; }
+    .notif-content h4 {
+      margin: 0 0 4px;
+      font-size: 0.9rem;
+      color: var(--admin-dark);
+    }
+    .notif-content p {
+      margin: 0 0 6px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    .notif-time {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <a href="admin-dashboard.html" class="admin-brand">
+        <div class="admin-brand-icon">✨</div>
+        <div class="admin-brand-text">Master<span>Admin</span></div>
+      </a>
+      
+      <div class="admin-nav">
+        <div class="admin-nav-group">Main Menu</div>
+        <a href="admin-dashboard.html" class="admin-link active">
+          <span class="icon">📊</span> Dashboard
+        </a>
+        
+        <div class="admin-nav-group">Platform Management</div>
+        <a href="admin-users.html" class="admin-link">
+          <span class="icon">👥</span> Users & Stores <span class="badge">12 New</span>
+        </a>
+        <a href="admin-products.html" class="admin-link">
+          <span class="icon">📦</span> Products
+        </a>
+        <a href="admin-subscriptions.html" class="admin-link">
+          <span class="icon">💎</span> Subscriptions
+        </a>
+        
+        <div class="admin-nav-group">Content & Marketing</div>
+        <a href="admin-blog.html" class="admin-link">
+          <span class="icon">📝</span> Blog Editor
+        </a>
+        <a href="admin-ads.html" class="admin-link">
+          <span class="icon">📢</span> Ads & Promotions
+        </a>
+        
+        <div class="admin-nav-group">System</div>
+        <a href="#" class="admin-link">
+          <span class="icon">⚙️</span> Settings
+        </a>
+        <a href="index.html" class="admin-link" style="margin-top:20px; color:#f87171;">
+          <span class="icon">🚪</span> Exit to Frontend
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="admin-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search stores, users, products..." />
+        </div>
+        <div class="admin-profile">
+          <button style="background:none;border:none;font-size:1.2rem;cursor:pointer;position:relative;">
+            🔔
+            <span style="position:absolute;top:0;right:-2px;width:8px;height:8px;background:#ef4444;border-radius:50%;"></span>
+          </button>
+          <div style="text-align:right;">
+            <div style="font-weight:600;font-size:0.9rem;color:var(--admin-dark);">Super Admin</div>
+          </div>
+          <div class="admin-avatar">SA</div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <h1 class="page-title">Platform Overview</h1>
+        
+        <!-- Stats Row -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <span>Today's Visitors</span>
+              <div class="stat-icon icon-blue">👥</div>
+            </div>
+            <div class="stat-value">12,450</div>
+            <div class="stat-trend trend-up">↑ 18% vs yesterday</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <span>Total Revenue</span>
+              <div class="stat-icon icon-green">💰</div>
+            </div>
+            <div class="stat-value">$4,290.50</div>
+            <div class="stat-trend trend-up">↑ 12% vs yesterday</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <span>Active Stores</span>
+              <div class="stat-icon icon-orange">🏪</div>
+            </div>
+            <div class="stat-value">342</div>
+            <div class="stat-trend trend-up">↑ 12 new today</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-header">
+              <span>Active Subscriptions</span>
+              <div class="stat-icon icon-purple">💎</div>
+            </div>
+            <div class="stat-value">86</div>
+            <div class="stat-trend trend-up">↑ 4 upgrades today</div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          
+          <!-- Top Selling Stores -->
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">🏆 Top Selling Stores Today</h2>
+              <a href="admin-users.html" style="color:var(--admin-primary);font-size:0.9rem;text-decoration:none;font-weight:600;">View All</a>
+            </div>
+            <div class="panel-body">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Store Name</th>
+                    <th>Owner</th>
+                    <th>Sales Today</th>
+                    <th>Plan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="store-info">
+                        <div class="store-logo" style="background:var(--gradient-orange);color:white;">TE</div>
+                        <strong>Tech Elite</strong>
+                      </div>
+                    </td>
+                    <td>Ali Raza</td>
+                    <td><strong style="color:#16a34a;">$450.00</strong></td>
+                    <td><span style="background:#fef08a;color:#854d0e;padding:4px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;">VIP ($100)</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="store-info">
+                        <div class="store-logo">HK</div>
+                        <strong>Home Kitchen Pro</strong>
+                      </div>
+                    </td>
+                    <td>Sarah J.</td>
+                    <td><strong style="color:#16a34a;">$320.50</strong></td>
+                    <td><span style="background:#bae6fd;color:#0369a1;padding:4px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;">PRO ($50)</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="store-info">
+                        <div class="store-logo">GF</div>
+                        <strong>Gadget Freak</strong>
+                      </div>
+                    </td>
+                    <td>Mohammad Ali</td>
+                    <td><strong style="color:#16a34a;">$210.00</strong></td>
+                    <td><span style="background:#f1f5f9;color:#475569;padding:4px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;">BASIC ($25)</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="store-info">
+                        <div class="store-logo">BD</div>
+                        <strong>Beauty Drops</strong>
+                      </div>
+                    </td>
+                    <td>Aisha Khan</td>
+                    <td><strong style="color:#16a34a;">$185.00</strong></td>
+                    <td><span style="background:#f1f5f9;color:#475569;padding:4px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;">BASIC ($25)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Activity Notifications -->
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">🔔 Recent Activity</h2>
+            </div>
+            <div class="panel-body">
+              <ul class="notification-list">
+                <li class="notif-item">
+                  <div class="notif-icon notif-blue">👥</div>
+                  <div class="notif-content">
+                    <h4>New Store Created</h4>
+                    <p>Usman created "Usman Gadgets".</p>
+                    <span class="notif-time">2 mins ago</span>
+                  </div>
+                </li>
+                <li class="notif-item">
+                  <div class="notif-icon notif-orange">💎</div>
+                  <div class="notif-content">
+                    <h4>Subscription Upgrade</h4>
+                    <p>"Tech Elite" upgraded to VIP Plan.</p>
+                    <span class="notif-time">15 mins ago</span>
+                  </div>
+                </li>
+                <li class="notif-item">
+                  <div class="notif-icon notif-blue">👥</div>
+                  <div class="notif-content">
+                    <h4>New Account Registration</h4>
+                    <p>Fatima registered a new account.</p>
+                    <span class="notif-time">1 hour ago</span>
+                  </div>
+                </li>
+                <li class="notif-item">
+                  <div class="notif-icon" style="background:#dcfce7;color:#16a34a;">💰</div>
+                  <div class="notif-content">
+                    <h4>Payout Requested</h4>
+                    <p>"Home Kitchen Pro" requested $500 payout.</p>
+                    <span class="notif-time">2 hours ago</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

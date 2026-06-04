@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Browse products by category on Believe Yourself. Filter by source, price, and rating to find the best Amazon & AliExpress deals across Electronics, Home & Kitchen, Fashion, Beauty, and more."/>
+  <meta name="keywords" content="electronics deals, home kitchen products, fashion deals, beauty products, automotive, gadgets, Amazon category, AliExpress category"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="Electronics — Believe Yourself"/>
+  <meta property="og:description" content="Explore top-rated deals and expert-reviewed products by category. Filter, compare, and save on the best Amazon & AliExpress products."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://believeyourself.deals/category.html"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="canonical" href="https://believeyourself.deals/category.html"/>
+  <title>Electronics — Believe Yourself</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://believeyourself.deals/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Categories",
+        "item": "https://believeyourself.deals/category.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Electronics",
+        "item": "https://believeyourself.deals/category.html?cat=Electronics"
+      }
+    ]
+  }
+  </script>
+
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Believe Yourself",
+    "url": "https://believeyourself.deals",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://believeyourself.deals/products.html?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <style>
+    /* ---- Category Page Specific Styles ---- */
+
+    /* Hero */
+    .category-hero {
+      background: var(--gradient-hero);
+      padding: 120px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .category-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(0,180,216,0.10) 0%, transparent 60%);
+    }
+    .category-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .category-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .category-hero-content h1 {
+      color: var(--color-white);
+      margin-bottom: var(--space-sm);
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+    .category-hero-content h1 span {
+      background: var(--gradient-orange);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .category-page-count {
+      display: inline-block;
+      background: rgba(0,180,216,0.15);
+      border: 1px solid rgba(0,180,216,0.35);
+      color: var(--color-blue);
+      font-family: var(--font-heading);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      padding: 5px 16px;
+      border-radius: var(--radius-full);
+      margin-top: var(--space-md);
+      letter-spacing: 0.04em;
+    }
+
+    /* Sidebar title */
+    .filter-sidebar-title {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-lg);
+      font-weight: 800;
+      color: var(--color-text);
+      margin-bottom: var(--space-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-reset-btn {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-orange);
+      cursor: pointer;
+      font-family: var(--font-heading);
+      background: none;
+      border: none;
+      padding: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .filter-reset-btn:hover { opacity: 0.75; }
+
+    /* Price range */
+    .price-range-wrap { margin-top: var(--space-md); }
+    .price-range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input[type="range"]#price-range {
+      width: 100%;
+      accent-color: var(--color-orange);
+      cursor: pointer;
+    }
+    .price-display-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: var(--font-size-sm);
+      color: var(--color-text);
+    }
+    #price-display {
+      background: rgba(255,107,53,0.10);
+      border: 1px solid rgba(255,107,53,0.25);
+      color: var(--color-orange);
+      border-radius: var(--radius-full);
+      padding: 3px 12px;
+    }
+
+    /* Rating filter */
+    .rating-filter-option {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      padding: 8px 0;
+      transition: all var(--transition-fast);
+    }
+    .rating-filter-option input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-orange);
+      cursor: pointer;
+    }
+    .rating-filter-option label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rating-filter-option:hover label { color: var(--color-orange); }
+    .star-mini { color: var(--color-star); font-size: 13px; }
+
+    /* Category nav list */
+    .category-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .category-nav-list a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      font-weight: 500;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+    .category-nav-list a:hover,
+    .category-nav-list a.active {
+      background: rgba(255,107,53,0.08);
+      color: var(--color-orange);
+      padding-left: 16px;
+    }
+    .category-nav-list a .cat-icon { font-size: 15px; }
+
+    /* Mobile filter toggle */
+    .filter-toggle-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-white);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 10px 18px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      color: var(--color-text);
+      transition: all var(--transition-fast);
+    }
+    .filter-toggle-btn:hover {
+      border-color: var(--color-orange);
+      color: var(--color-orange);
+    }
+
+    /* Products top bar */
+    .products-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+    .products-count {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--color-text);
+      font-size: var(--font-size-base);
+    }
+    .products-count span { color: var(--color-orange); }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-3xl);
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--color-border);
+      background: var(--color-white);
+      color: var(--color-text);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+    .page-btn:hover, .page-btn.active {
+      background: var(--color-orange);
+      border-color: var(--color-orange);
+      color: var(--color-white);
+      box-shadow: var(--shadow-orange);
+      transform: translateY(-2px);
+    }
+    .page-btn.prev, .page-btn.next {
+      width: auto;
+      padding: 0 18px;
+      gap: 6px;
+    }
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .page-ellipsis {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .category-layout {
+        grid-template-columns: 1fr;
+      }
+      .filter-sidebar {
+        position: static;
+        display: none;
+      }
+      .filter-sidebar.open {
+        display: block;
+      }
+      .filter-toggle-btn {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Affiliate Disclosure Banner -->
+  <div class="affiliate-banner">
+    ⚡ This site contains affiliate links. We may earn a commission at no extra cost to you. <a href="affiliate-disclosure.html">Learn more</a>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="Believe Yourself Home">
+        <div class="logo-icon">✨</div>
+        <span class="logo-text">Believe<span>Yourself</span></span>
+      </a>
+
+      <!-- Main Navigation -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+
+        <div class="nav-item">
+          <a href="products.html" class="nav-link">Deals ▾</a>
+          <div class="nav-dropdown">
+            <a href="products.html"><span class="icon">🔥</span> All Deals</a>
+            <a href="products.html?search=trending"><span class="icon">📈</span> Trending Now</a>
+            <a href="products.html?search=bestseller"><span class="icon">🏆</span> Best Sellers</a>
+            <a href="comparison.html"><span class="icon">⚖️</span> Compare Products</a>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="category.html" class="nav-link active">Categories ▾</a>
+          <div class="nav-dropdown">
+            <a href="category.html?cat=Electronics"><span class="icon">💻</span> Electronics</a>
+            <a href="category.html?cat=Home & Kitchen"><span class="icon">🏠</span> Home &amp; Kitchen</a>
+            <a href="category.html?cat=Fashion"><span class="icon">👗</span> Fashion</a>
+            <a href="category.html?cat=Beauty"><span class="icon">💄</span> Beauty</a>
+            <a href="category.html?cat=Automotive"><span class="icon">🚗</span> Automotive</a>
+            <a href="category.html?cat=Gadgets"><span class="icon">⌚</span> Gadgets</a>
+            <a href="category.html?cat=Pets"><span class="icon">🐾</span> Pets</a>
+          </div>
+        </div>
+
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button class="header-search-btn" id="open-search" aria-label="Search products">
+          🔍
+        </button>
+        <a href="products.html" class="btn btn-primary btn-sm hide-mobile">Shop Deals</a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile Navigation">
+    <div class="mobile-nav-links">
+      <a href="index.html">🏠 Home</a>
+      <a href="products.html">🔥 All Deals</a>
+      <div class="mobile-nav-divider"></div>
+      <a href="category.html?cat=Electronics">💻 Electronics</a>
+      <a href="category.html?cat=Home & Kitchen">🏠 Home &amp; Kitchen</a>
+      <a href="category.html?cat=Fashion">👗 Fashion</a>
+      <a href="category.html?cat=Beauty">💄 Beauty</a>
+      <a href="category.html?cat=Automotive">🚗 Automotive</a>
+      <a href="category.html?cat=Gadgets">⌚ Gadgets</a>
+      <a href="category.html?cat=Pets">🐾 Pets</a>
+      <div class="mobile-nav-divider"></div>
+      <a href="comparison.html">⚖️ Compare Products</a>
+      <a href="blog.html">📝 Blog</a>
+      <a href="about.html">ℹ️ About Us</a>
+      <a href="contact.html">📩 Contact</a>
+    </div>
+  </nav>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+    <button class="search-close" id="search-close" aria-label="Close search">✕</button>
+    <div class="search-overlay-inner">
+      <h3>Search Products &amp; Reviews</h3>
+      <form class="search-form" id="search-form" role="search">
+        <input class="search-input" id="search-input" type="search"
+               placeholder="Search headphones, air fryer, yoga mat…"
+               aria-label="Search products" autocomplete="off"/>
+        <button type="submit" class="search-submit" aria-label="Submit search">🔍</button>
+      </form>
+      <div class="search-tags" aria-label="Popular searches">
+        <span class="search-tag">Headphones</span>
+        <span class="search-tag">Air Fryer</span>
+        <span class="search-tag">Smart Watch</span>
+        <span class="search-tag">Mechanical Keyboard</span>
+        <span class="search-tag">Bluetooth Speaker</span>
+        <span class="search-tag">USB-C Hub</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+
+    <!-- ==============================
+         PAGE HERO
+         ============================== -->
+    <section class="category-hero" aria-label="Category Hero">
+      <div class="category-hero-grid" aria-hidden="true"></div>
+      <div class="container">
+        <div class="category-hero-content">
+          <!-- Breadcrumb -->
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">›</span>
+            <a href="category.html">Categories</a>
+            <span class="sep">›</span>
+            <span id="breadcrumb-category">Electronics</span>
+          </nav>
+          <div class="section-tag">🗂️ Browse by Category</div>
+          <h1><span class="category-page-title">Electronics</span></h1>
+          <div class="category-page-count" role="status" aria-live="polite">Loading products…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         PRODUCTS SECTION
+         ============================== -->
+    <section class="section-pad" aria-labelledby="category-products-heading">
+      <div class="container">
+
+        <!-- Top Bar -->
+        <div class="products-top-bar">
+          <div style="display:flex;align-items:center;gap:var(--space-md);">
+            <button class="filter-toggle-btn" id="filter-toggle-btn" aria-expanded="false" aria-controls="filter-sidebar">
+              🔧 Filters
+            </button>
+            <p class="products-count">
+              Category: <span id="cat-name-display">Electronics</span>
+            </p>
+          </div>
+          <a href="products.html" class="btn btn-outline btn-sm">
+            🔥 View All Deals
+          </a>
+        </div>
+
+        <!-- Category Layout: Sidebar + Grid -->
+        <div class="category-layout">
+
+          <!-- ===== FILTER SIDEBAR ===== -->
+          <aside class="filter-sidebar" id="filter-sidebar" aria-label="Filter products">
+            <div class="filter-sidebar-title">
+              Filter Products
+              <button class="filter-reset-btn" id="filter-reset-btn" type="button">Clear Filters</button>
+            </div>
+
+            <!-- Source Filter -->
+            <div class="filter-group">
+              <h3 class="filter-title">Source</h3>
+              <label class="filter-option">
+                <input type="checkbox" id="source-amazon" name="source" value="amazon" checked/>
+                <label for="source-amazon">🛒 Amazon</label>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" id="source-aliexpress" name="source" value="aliexpress" checked/>
+                <label for="source-aliexpress">🛍️ AliExpress</label>
+              </label>
+            </div>
+
+            <!-- Price Range Filter -->
+            <div class="filter-group">
+              <h3 class="filter-title">Price Range</h3>
+              <div class="price-range-wrap">
+                <div class="price-range-labels">
+                  <span>$0</span>
+                  <span>$300</span>
+                </div>
+                <input type="range" id="price-range" min="0" max="300" value="300" step="5"
+                       aria-label="Maximum price" aria-valuemin="0" aria-valuemax="300" aria-valuenow="300"/>
+                <div class="price-display-wrap">
+                  Up to <span id="price-display">$300</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rating Filter -->
+            <div class="filter-group">
+              <h3 class="filter-title">Min. Rating</h3>
+              <div class="rating-filter-option">
+                <input type="radio" id="rating-all" name="rating" value="0" checked/>
+                <label for="rating-all"><span class="star-mini">★★★★★</span> All Ratings</label>
+              </div>
+              <div class="rating-filter-option">
+                <input type="radio" id="rating-3" name="rating" value="3"/>
+                <label for="rating-3"><span class="star-mini">★★★</span> 3★ &amp; above</label>
+              </div>
+              <div class="rating-filter-option">
+                <input type="radio" id="rating-4" name="rating" value="4"/>
+                <label for="rating-4"><span class="star-mini">★★★★</span> 4★ &amp; above</label>
+              </div>
+            </div>
+
+            <!-- Categories List -->
+            <div class="filter-group">
+              <h3 class="filter-title">Categories</h3>
+              <nav class="category-nav-list" aria-label="Browse categories">
+                <a href="category.html?cat=Electronics"><span class="cat-icon">💻</span> Electronics</a>
+                <a href="category.html?cat=Home & Kitchen"><span class="cat-icon">🏠</span> Home &amp; Kitchen</a>
+                <a href="category.html?cat=Fashion"><span class="cat-icon">👗</span> Fashion</a>
+                <a href="category.html?cat=Beauty"><span class="cat-icon">💄</span> Beauty</a>
+                <a href="category.html?cat=Automotive"><span class="cat-icon">🚗</span> Automotive</a>
+                <a href="category.html?cat=Tools"><span class="cat-icon">🔧</span> Tools</a>
+                <a href="category.html?cat=Pets"><span class="cat-icon">🐾</span> Pets</a>
+                <a href="category.html?cat=Gadgets"><span class="cat-icon">⌚</span> Gadgets</a>
+              </nav>
+            </div>
+
+            <!-- Clear Filters CTA -->
+            <button class="btn btn-outline btn-full" id="clear-filters-btn" type="button"
+                    style="margin-top:var(--space-md);">
+              ✕ Clear Filters
+            </button>
+          </aside>
+
+          <!-- ===== PRODUCTS GRID ===== -->
+          <div>
+            <h2 id="category-products-heading" class="sr-only">Category Product Listings</h2>
+
+            <!-- Skeleton loaders -->
+            <div class="product-grid" id="category-products" aria-label="Category products" aria-live="polite">
+              <div class="skeleton" style="height:380px;border-radius:16px;"></div>
+              <div class="skeleton" style="height:380px;border-radius:16px;"></div>
+              <div class="skeleton" style="height:380px;border-radius:16px;"></div>
+              <div class="skeleton" style="height:380px;border-radius:16px;"></div>
+              <div class="skeleton" style="height:380px;border-radius:16px;"></div>
+              <div class="skeleton" style="height:380px;border-radius:16px;"></div>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="pagination" id="pagination" aria-label="Category products pagination">
+              <button class="page-btn prev" aria-label="Previous page" disabled>
+                ← Previous
+              </button>
+              <a href="#category-products" class="page-btn active" aria-current="page" aria-label="Page 1">1</a>
+              <a href="#category-products" class="page-btn" aria-label="Page 2">2</a>
+              <a href="#category-products" class="page-btn" aria-label="Page 3">3</a>
+              <span class="page-ellipsis" aria-hidden="true">…</span>
+              <a href="#category-products" class="page-btn" aria-label="Page 8">8</a>
+              <button class="page-btn next" aria-label="Next page">
+                Next →
+              </button>
+            </nav>
+          </div>
+
+        </div><!-- /.category-layout -->
+      </div>
+    </section>
+
+    <!-- ==============================
+         MORE CATEGORIES CTA
+         ============================== -->
+    <section class="section-pad-sm" style="background:var(--color-bg-alt);">
+      <div class="container text-center">
+        <div class="section-tag" style="margin-bottom:16px;">🗂️ More Categories</div>
+        <h2 style="margin-bottom:16px;">Explore All Product Categories</h2>
+        <p style="max-width:500px;margin:0 auto 32px;">Discover deals across all 8 of our hand-curated categories, updated daily with the freshest Amazon &amp; AliExpress products.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <a href="category.html?cat=Electronics" class="btn btn-outline">💻 Electronics</a>
+          <a href="category.html?cat=Home & Kitchen" class="btn btn-outline">🏠 Home &amp; Kitchen</a>
+          <a href="category.html?cat=Fashion" class="btn btn-outline">👗 Fashion</a>
+          <a href="category.html?cat=Beauty" class="btn btn-outline">💄 Beauty</a>
+          <a href="category.html?cat=Gadgets" class="btn btn-outline">⌚ Gadgets</a>
+          <a href="category.html?cat=Pets" class="btn btn-outline">🐾 Pets</a>
+          <a href="category.html?cat=Automotive" class="btn btn-outline">🚗 Automotive</a>
+          <a href="category.html?cat=Tools" class="btn btn-outline">🔧 Tools</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         NEWSLETTER
+         ============================== -->
+    <section class="section-pad newsletter-section" id="newsletter" aria-labelledby="newsletter-heading">
+      <div class="container">
+        <div class="newsletter-inner">
+          <div class="section-tag" style="margin:0 auto 16px;">📧 Stay in the Loop</div>
+          <h2 id="newsletter-heading">Get Exclusive Deals in Your Inbox</h2>
+          <p>Join 100,000+ smart shoppers who get our weekly deal roundup, buying guides, and limited-time offers.</p>
+          <form class="newsletter-form" id="newsletter-form" aria-label="Newsletter subscription">
+            <input type="email" class="newsletter-input" id="newsletter-email"
+                   placeholder="Enter your email address…" required
+                   aria-label="Email address"/>
+            <button type="submit" class="btn btn-primary" id="newsletter-submit">Subscribe Free</button>
+          </form>
+          <div class="newsletter-perks">
+            <span class="newsletter-perk"><span class="icon">✅</span> No spam, ever</span>
+            <span class="newsletter-perk"><span class="icon">🔓</span> Unsubscribe anytime</span>
+            <span class="newsletter-perk"><span class="icon">🎁</span> Exclusive discounts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">✨</div>
+            <span class="logo-text" style="color:white;">Believe<span>Yourself</span></span>
+          </a>
+          <p>Your trusted guide for finding the best deals on Amazon and AliExpress. Expert reviews, real comparisons, and honest recommendations for shoppers in the USA, UK, Canada &amp; Europe.</p>
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">📘</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="social-btn" aria-label="Twitter/X">🐦</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">📸</a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="social-btn" aria-label="Pinterest">📌</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">▶️</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">🎵</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <nav class="footer-links" aria-label="Quick links">
+            <a href="index.html">Home</a>
+            <a href="products.html">All Deals</a>
+            <a href="comparison.html">Compare Products</a>
+            <a href="blog.html">Blog</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <nav class="footer-links" aria-label="Product categories">
+            <a href="category.html?cat=Electronics">💻 Electronics</a>
+            <a href="category.html?cat=Home & Kitchen">🏠 Home &amp; Kitchen</a>
+            <a href="category.html?cat=Fashion">👗 Fashion</a>
+            <a href="category.html?cat=Beauty">💄 Beauty</a>
+            <a href="category.html?cat=Gadgets">⌚ Gadgets</a>
+            <a href="category.html?cat=Pets">🐾 Pets</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <nav class="footer-links" aria-label="Legal pages">
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+            <a href="disclaimer.html">Disclaimer</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-bottom-text">© 2025 Believe Yourself. All rights reserved. Affiliate links on this site earn us a commission at no extra cost to you.</p>
+        <div class="footer-bottom-links">
+          <a href="privacy-policy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="affiliate-disclosure.html">Disclosure</a>
+          <a href="sitemap.html">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top">↑</a>
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* ---- Category Page Interactive Logic ---- */
+    (function() {
+      'use strict';
+
+      /* — Sync breadcrumb + page title with URL param — */
+      const params     = new URLSearchParams(window.location.search);
+      const catParam   = params.get('cat') || 'Electronics';
+
+      // Update <title>
+      document.title = catParam + ' — Believe Yourself';
+
+      // Update breadcrumb
+      const breadcrumbCat = document.getElementById('breadcrumb-category');
+      if (breadcrumbCat) breadcrumbCat.textContent = catParam;
+
+      // Update top-bar display
+      const catNameDisplay = document.getElementById('cat-name-display');
+      if (catNameDisplay) catNameDisplay.textContent = catParam;
+
+      // Highlight active category in sidebar nav
+      const catLinks = document.querySelectorAll('.category-nav-list a');
+      catLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.includes('cat=' + catParam)) {
+          link.classList.add('active');
+        }
+      });
+
+      /* — Price Range slider — */
+      const priceRange   = document.getElementById('price-range');
+      const priceDisplay = document.getElementById('price-display');
+      if (priceRange && priceDisplay) {
+        priceRange.addEventListener('input', function() {
+          priceDisplay.textContent = this.value >= 300 ? '$300+' : '$' + this.value;
+        });
+      }
+
+      /* — Mobile filter toggle — */
+      const filterToggleBtn = document.getElementById('filter-toggle-btn');
+      const filterSidebar   = document.getElementById('filter-sidebar');
+      if (filterToggleBtn && filterSidebar) {
+        filterToggleBtn.addEventListener('click', function() {
+          const isOpen = filterSidebar.classList.toggle('open');
+          this.setAttribute('aria-expanded', isOpen);
+          this.textContent = isOpen ? '✕ Close Filters' : '🔧 Filters';
+        });
+      }
+
+      /* — Clear / Reset filters — */
+      function resetFilters() {
+        if (priceRange) { priceRange.value = 300; }
+        if (priceDisplay) { priceDisplay.textContent = '$300'; }
+        document.querySelectorAll('input[name="source"]').forEach(cb => cb.checked = true);
+        const ratingAll = document.getElementById('rating-all');
+        if (ratingAll) ratingAll.checked = true;
+      }
+
+      const filterResetBtn  = document.getElementById('filter-reset-btn');
+      const clearFiltersBtn = document.getElementById('clear-filters-btn');
+      if (filterResetBtn)  filterResetBtn.addEventListener('click', resetFilters);
+      if (clearFiltersBtn) clearFiltersBtn.addEventListener('click', resetFilters);
+
+      /* — Pagination — */
+      const paginationBtns = document.querySelectorAll('.page-btn:not(.prev):not(.next)');
+      const prevBtn        = document.querySelector('.page-btn.prev');
+      const nextBtn        = document.querySelector('.page-btn.next');
+
+      let currentPage = 1;
+      const totalPages = paginationBtns.length;
+
+      function updatePagination(page) {
+        currentPage = page;
+        paginationBtns.forEach((btn, idx) => {
+          btn.classList.toggle('active', idx + 1 === page);
+          if (idx + 1 === page) btn.setAttribute('aria-current', 'page');
+          else btn.removeAttribute('aria-current');
+        });
+        if (prevBtn) prevBtn.disabled = (page === 1);
+        if (nextBtn) nextBtn.disabled = (page === totalPages);
+      }
+
+      paginationBtns.forEach((btn, idx) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          updatePagination(idx + 1);
+          document.getElementById('category-products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (currentPage > 1) updatePagination(currentPage - 1);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (currentPage < totalPages) updatePagination(currentPage + 1);
+        });
+      }
+
+      updatePagination(1);
+
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Believe Yourself Blog — Expert product reviews, buying guides, and dropshipping tips from our team of specialists. Find the best deals and make smarter purchase decisions."/>
+  <meta name="keywords" content="product reviews, buying guide, dropshipping tips, best headphones, air fryer review, Amazon deals, AliExpress dropshipping"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="Blog — Expert Reviews & Buying Guides | Believe Yourself"/>
+  <meta property="og:description" content="In-depth product reviews, buying guides, and dropshipping tips from our expert team. Updated weekly."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://believeyourself.deals/blog.html"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="canonical" href="https://believeyourself.deals/blog.html"/>
+  <title>Blog — Expert Reviews & Buying Guides | Believe Yourself</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <!-- Schema.org Blog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Believe Yourself Blog",
+    "url": "https://believeyourself.deals/blog.html",
+    "description": "Expert product reviews, buying guides, and dropshipping tips",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Believe Yourself",
+      "url": "https://believeyourself.deals"
+    }
+  }
+  </script>
+  <style>
+    /* ---- Blog Page Specific Styles ---- */
+    .blog-page-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .blog-main { min-width: 0; }
+
+    /* Category Filter Tabs */
+    .blog-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-white);
+      color: var(--color-text-muted);
+      transition: all 0.25s ease;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--color-orange);
+      color: var(--color-orange);
+      background: rgba(255,107,53,0.05);
+    }
+
+    .filter-pill.active {
+      background: var(--gradient-orange);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(255,107,53,0.35);
+    }
+
+    /* Blog Grid (6 cards, 2-col) */
+    .blog-grid-6 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    /* Sidebar */
+    .blog-sidebar {
+      position: sticky;
+      top: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .sidebar-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 20px rgba(13,27,42,0.08);
+    }
+
+    .sidebar-card h4 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--color-orange);
+      display: inline-block;
+    }
+
+    /* Popular Posts */
+    .popular-post {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .popular-post:last-child { border-bottom: none; padding-bottom: 0; }
+    .popular-post:first-of-type { padding-top: 0; }
+
+    .popular-post:hover .popular-post-title {
+      color: var(--color-orange);
+    }
+
+    .popular-post-thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .popular-post-info { flex: 1; min-width: 0; }
+
+    .popular-post-title {
+      font-family: var(--font-heading);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .popular-post-date {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Sidebar Newsletter */
+    .sidebar-newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-newsletter-form input {
+      width: 100%;
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.875rem;
+      font-family: var(--font-body);
+      color: var(--color-text);
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+
+    .sidebar-newsletter-form input:focus {
+      border-color: var(--color-orange);
+    }
+
+    .sidebar-newsletter-form p {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 14px;
+    }
+
+    /* About Author Card */
+    .author-card-content {
+      text-align: center;
+    }
+
+    .author-card-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--gradient-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      margin: 0 auto 12px;
+    }
+
+    .author-card-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+
+    .author-card-role {
+      font-size: 0.8125rem;
+      color: var(--color-orange);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .author-card-bio {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* Blog tag colors */
+    .blog-tag-review { background: var(--color-blue); }
+    .blog-tag-dropship { background: var(--color-teal); }
+    .blog-tag-guide { background: var(--color-orange); }
+  </style>
+</head>
+<body>
+
+  <!-- Affiliate Disclosure Banner -->
+  <div class="affiliate-banner">
+    ⚡ This site contains affiliate links. We may earn a commission at no extra cost to you. <a href="affiliate-disclosure.html">Learn more</a>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="Believe Yourself Home">
+        <div class="logo-icon">✨</div>
+        <span class="logo-text">Believe<span>Yourself</span></span>
+      </a>
+
+      <!-- Main Navigation -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+
+        <div class="nav-item">
+          <a href="products.html" class="nav-link">Deals ▾</a>
+          <div class="nav-dropdown">
+            <a href="products.html"><span class="icon">🔥</span> All Deals</a>
+            <a href="products.html?search=trending"><span class="icon">📈</span> Trending Now</a>
+            <a href="products.html?search=bestseller"><span class="icon">🏆</span> Best Sellers</a>
+            <a href="comparison.html"><span class="icon">⚖️</span> Compare Products</a>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="category.html" class="nav-link">Categories ▾</a>
+          <div class="nav-dropdown">
+            <a href="category.html?cat=Electronics"><span class="icon">💻</span> Electronics</a>
+            <a href="category.html?cat=Home & Kitchen"><span class="icon">🏠</span> Home & Kitchen</a>
+            <a href="category.html?cat=Fashion"><span class="icon">👗</span> Fashion</a>
+            <a href="category.html?cat=Beauty"><span class="icon">💄</span> Beauty</a>
+            <a href="category.html?cat=Automotive"><span class="icon">🚗</span> Automotive</a>
+            <a href="category.html?cat=Gadgets"><span class="icon">⌚</span> Gadgets</a>
+            <a href="category.html?cat=Pets"><span class="icon">🐾</span> Pets</a>
+          </div>
+        </div>
+
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button class="header-search-btn" id="open-search" aria-label="Search products">🔍</button>
+        <a href="products.html" class="btn btn-primary btn-sm hide-mobile">Shop Deals</a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile Navigation">
+    <div class="mobile-nav-links">
+      <a href="index.html">🏠 Home</a>
+      <a href="products.html">🔥 All Deals</a>
+      <div class="mobile-nav-divider"></div>
+      <a href="category.html?cat=Electronics">💻 Electronics</a>
+      <a href="category.html?cat=Home & Kitchen">🏠 Home & Kitchen</a>
+      <a href="category.html?cat=Fashion">👗 Fashion</a>
+      <a href="category.html?cat=Beauty">💄 Beauty</a>
+      <a href="category.html?cat=Automotive">🚗 Automotive</a>
+      <a href="category.html?cat=Gadgets">⌚ Gadgets</a>
+      <a href="category.html?cat=Pets">🐾 Pets</a>
+      <div class="mobile-nav-divider"></div>
+      <a href="comparison.html">⚖️ Compare Products</a>
+      <a href="blog.html">📝 Blog</a>
+      <a href="about.html">ℹ️ About Us</a>
+      <a href="contact.html">📩 Contact</a>
+    </div>
+  </nav>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+    <button class="search-close" id="search-close" aria-label="Close search">✕</button>
+    <div class="search-overlay-inner">
+      <h3>Search Products & Reviews</h3>
+      <form class="search-form" id="search-form" role="search">
+        <input class="search-input" id="search-input" type="search"
+               placeholder="Search headphones, air fryer, yoga mat…"
+               aria-label="Search products" autocomplete="off"/>
+        <button type="submit" class="search-submit" aria-label="Submit search">🔍</button>
+      </form>
+      <div class="search-tags" aria-label="Popular searches">
+        <span class="search-tag">Headphones</span>
+        <span class="search-tag">Air Fryer</span>
+        <span class="search-tag">Smart Watch</span>
+        <span class="search-tag">Kitchen Gadgets</span>
+        <span class="search-tag">Dropshipping</span>
+        <span class="search-tag">AliExpress</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+
+    <!-- ====== PAGE HERO ====== -->
+    <section class="page-hero" aria-label="Blog hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">›</span>
+            <span>Blog</span>
+          </nav>
+          <div class="section-tag" style="margin-bottom:16px;">📝 Expert Insights</div>
+          <h1>Expert Reviews & Buying Guides</h1>
+          <p>Insights from our team of product specialists — unbiased, in-depth, and always up to date.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== BLOG CONTENT ====== -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="blog-page-layout">
+
+          <!-- ===== MAIN BLOG COLUMN ===== -->
+          <div class="blog-main">
+
+            <!-- Category Filter Tabs -->
+            <div class="blog-filter-bar" role="tablist" aria-label="Filter articles by category">
+              <button class="filter-pill active" data-filter="all" role="tab" aria-selected="true">🗂️ All</button>
+              <button class="filter-pill" data-filter="buying-guide" role="tab" aria-selected="false">📖 Buying Guide</button>
+              <button class="filter-pill" data-filter="product-review" role="tab" aria-selected="false">⭐ Product Review</button>
+              <button class="filter-pill" data-filter="dropshipping" role="tab" aria-selected="false">🚀 Dropshipping Tips</button>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid-6" id="blog-grid" aria-label="Blog articles">
+
+              <!-- Card 1: Best Headphones -->
+              <article class="blog-card fade-in-up stagger-1" data-category="buying-guide">
+                <div class="blog-card-image">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=340&fit=crop" alt="Best Noise-Cancelling Headphones 2025" loading="lazy"/>
+                  <span class="blog-tag blog-tag-guide">Buying Guide</span>
+                </div>
+                <div class="blog-card-body">
+                  <div class="blog-meta">
+                    <span class="blog-meta-item">📅 May 28, 2025</span>
+                    <span class="blog-meta-item">⏱️ 8 min read</span>
+                  </div>
+                  <h3 class="blog-title"><a href="blog-post.html?id=1">Best Noise-Cancelling Headphones of 2025 — Complete Buyer's Guide</a></h3>
+                  <p class="blog-excerpt">We tested 12 pairs over 6 weeks. Here's our definitive ranking with everything you need to choose the right headphones for your budget and lifestyle.</p>
+                  <div class="blog-card-footer">
+                    <div class="blog-author">
+                      <div class="blog-author-avatar">JD</div>
+                      <span>James Dawson</span>
+                    </div>
+                    <a href="blog-post.html?id=1" class="read-more">Read More →</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2: Ninja Air Fryer Review -->
+              <article class="blog-card fade-in-up stagger-2" data-category="product-review">
+                <div class="blog-card-image">
+                  <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&h=340&fit=crop" alt="Ninja AF101 Air Fryer Full Review" loading="lazy"/>
+                  <span class="blog-tag blog-tag-review">Product Review</span>
+                </div>
+                <div class="blog-card-body">
+                  <div class="blog-meta">
+                    <span class="blog-meta-item">📅 May 20, 2025</span>
+                    <span class="blog-meta-item">⏱️ 6 min read</span>
+                  </div>
+                  <h3 class="blog-title"><a href="blog-post.html?id=2">Ninja AF101 Air Fryer Full Review — Is It Worth the Hype?</a></h3>
+                  <p class="blog-excerpt">After 3 months of daily use, we break down everything — cooking performance, ease of clean-up, and whether it truly delivers healthier meals at home.</p>
+                  <div class="blog-card-footer">
+                    <div class="blog-author">
+                      <div class="blog-author-avatar" style="background:var(--gradient-blue);">SC</div>
+                      <span>Sarah Chen</span>
+                    </div>
+                    <a href="blog-post.html?id=2" class="read-more">Read More →</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3: AliExpress Dropshipping -->
+              <article class="blog-card fade-in-up stagger-3" data-category="dropshipping">
+                <div class="blog-card-image">
+                  <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=340&fit=crop" alt="AliExpress Dropshipping Guide 2025" loading="lazy"/>
+                  <span class="blog-tag blog-tag-dropship">Dropshipping Tips</span>
+                </div>
+                <div class="blog-card-body">
+                  <div class="blog-meta">
+                    <span class="blog-meta-item">📅 May 12, 2025</span>
+                    <span class="blog-meta-item">⏱️ 10 min read</span>
+                  </div>
+                  <h3 class="blog-title"><a href="blog-post.html?id=3">AliExpress Dropshipping Complete Guide 2025 — Start & Scale</a></h3>
+                  <p class="blog-excerpt">A step-by-step beginner's guide covering supplier selection, product research, store setup, and proven strategies for scaling to $10K/month profitably.</p>
+                  <div class="blog-card-footer">
+                    <div class="blog-author">
+                      <div class="blog-author-avatar" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED);">MR</div>
+                      <span>Mark Rivera</span>
+                    </div>
+                    <a href="blog-post.html?id=3" class="read-more">Read More →</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 4: Best Kitchen Gadgets Under $50 -->
+              <article class="blog-card fade-in-up stagger-4" data-category="buying-guide">
+                <div class="blog-card-image">
+                  <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=340&fit=crop" alt="Best Amazon Kitchen Gadgets Under 50 Dollars" loading="lazy"/>
+                  <span class="blog-tag blog-tag-guide">Buying Guide</span>
+                </div>
+                <div class="blog-card-body">
+                  <div class="blog-meta">
+                    <span class="blog-meta-item">📅 June 2, 2025</span>
+                    <span class="blog-meta-item">⏱️ 7 min read</span>
+                  </div>
+                  <h3 class="blog-title"><a href="blog-post.html?id=4">10 Best Amazon Kitchen Gadgets Under $50 (2025 Edition)</a></h3>
+                  <p class="blog-excerpt">From smart scales to immersion blenders — these 10 budget-friendly kitchen tools will transform your cooking without emptying your wallet.</p>
+                  <div class="blog-card-footer">
+                    <div class="blog-author">
+                      <div class="blog-author-avatar" style="background:linear-gradient(135deg,#EC4899,#BE185D);">AP</div>
+                      <span>Amy Park</span>
+                    </div>
+                    <a href="blog-post.html?id=4" class="read-more">Read More →</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 5: Smartwatch Comparison -->
+              <article class="blog-card fade-in-up stagger-5" data-category="product-review">
+                <div class="blog-card-image">
+                  <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&h=340&fit=crop" alt="Smart Watch Comparison Fitbit Apple Samsung" loading="lazy"/>
+                  <span class="blog-tag blog-tag-review">Product Review</span>
+                </div>
+                <div class="blog-card-body">
+                  <div class="blog-meta">
+                    <span class="blog-meta-item">📅 May 15, 2025</span>
+                    <span class="blog-meta-item">⏱️ 9 min read</span>
+                  </div>
+                  <h3 class="blog-title"><a href="blog-post.html?id=5">Smart Watch Face-Off: Fitbit vs Apple vs Samsung (2025)</a></h3>
+                  <p class="blog-excerpt">We wore all three for 30 days tracking sleep, fitness, and battery life. Our head-to-head comparison reveals which smartwatch wins for different lifestyles.</p>
+                  <div class="blog-card-footer">
+                    <div class="blog-author">
+                      <div class="blog-author-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706);">TH</div>
+                      <span>Tom Hughes</span>
+                    </div>
+                    <a href="blog-post.html?id=5" class="read-more">Read More →</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 6: Winning Dropshipping Products -->
+              <article class="blog-card fade-in-up stagger-6" data-category="dropshipping">
+                <div class="blog-card-image">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=340&fit=crop" alt="How to Find Winning Dropshipping Products" loading="lazy"/>
+                  <span class="blog-tag blog-tag-dropship">Dropshipping Tips</span>
+                </div>
+                <div class="blog-card-body">
+                  <div class="blog-meta">
+                    <span class="blog-meta-item">📅 June 5, 2025</span>
+                    <span class="blog-meta-item">⏱️ 12 min read</span>
+                  </div>
+                  <h3 class="blog-title"><a href="blog-post.html?id=6">How to Find Winning Dropshipping Products in 2025 (Proven Method)</a></h3>
+                  <p class="blog-excerpt">Discover the exact product research framework top dropshippers use to identify high-margin, low-competition winners before they go viral.</p>
+                  <div class="blog-card-footer">
+                    <div class="blog-author">
+                      <div class="blog-author-avatar" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED);">MR</div>
+                      <span>Mark Rivera</span>
+                    </div>
+                    <a href="blog-post.html?id=6" class="read-more">Read More →</a>
+                  </div>
+                </div>
+              </article>
+
+            </div><!-- end blog-grid-6 -->
+
+          </div><!-- end blog-main -->
+
+          <!-- ===== SIDEBAR ===== -->
+          <aside class="blog-sidebar" aria-label="Blog sidebar">
+
+            <!-- Popular Posts -->
+            <div class="sidebar-card">
+              <h4>🔥 Popular Posts</h4>
+              <nav aria-label="Popular posts">
+
+                <a href="blog-post.html?id=1" class="popular-post">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=120&h=120&fit=crop" alt="Best Headphones 2025" class="popular-post-thumb" loading="lazy"/>
+                  <div class="popular-post-info">
+                    <div class="popular-post-title">Best Noise-Cancelling Headphones of 2025 — Complete Guide</div>
+                    <div class="popular-post-date">📅 May 28, 2025</div>
+                  </div>
+                </a>
+
+                <a href="blog-post.html?id=5" class="popular-post">
+                  <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=120&h=120&fit=crop" alt="Smartwatch Comparison" class="popular-post-thumb" loading="lazy"/>
+                  <div class="popular-post-info">
+                    <div class="popular-post-title">Fitbit vs Apple vs Samsung: Which Smartwatch Wins?</div>
+                    <div class="popular-post-date">📅 May 15, 2025</div>
+                  </div>
+                </a>
+
+                <a href="blog-post.html?id=3" class="popular-post">
+                  <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=120&h=120&fit=crop" alt="AliExpress Dropshipping" class="popular-post-thumb" loading="lazy"/>
+                  <div class="popular-post-info">
+                    <div class="popular-post-title">AliExpress Dropshipping Complete Guide 2025</div>
+                    <div class="popular-post-date">📅 May 12, 2025</div>
+                  </div>
+                </a>
+
+                <a href="blog-post.html?id=2" class="popular-post">
+                  <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=120&h=120&fit=crop" alt="Ninja Air Fryer Review" class="popular-post-thumb" loading="lazy"/>
+                  <div class="popular-post-info">
+                    <div class="popular-post-title">Ninja AF101 Air Fryer Full Review — Worth the Hype?</div>
+                    <div class="popular-post-date">📅 May 20, 2025</div>
+                  </div>
+                </a>
+
+                <a href="blog-post.html?id=6" class="popular-post">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&h=120&fit=crop" alt="Winning Dropshipping Products" class="popular-post-thumb" loading="lazy"/>
+                  <div class="popular-post-info">
+                    <div class="popular-post-title">How to Find Winning Dropshipping Products in 2025</div>
+                    <div class="popular-post-date">📅 June 5, 2025</div>
+                  </div>
+                </a>
+
+              </nav>
+            </div>
+
+            <!-- Newsletter Widget -->
+            <div class="sidebar-card" style="background:linear-gradient(135deg,#0D1B2A,#1a3a5c);border-color:rgba(255,255,255,0.1);">
+              <h4 style="color:white;border-bottom-color:var(--color-orange);">📧 Stay Updated</h4>
+              <p style="color:rgba(255,255,255,0.65);font-size:0.875rem;margin-bottom:16px;">Get weekly deals and exclusive guides delivered to your inbox.</p>
+              <form class="sidebar-newsletter-form" id="sidebar-newsletter" aria-label="Sidebar newsletter">
+                <input type="email" placeholder="Your email address…" required aria-label="Email address"
+                  style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);color:white;"/>
+                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Subscribe Free ✓</button>
+              </form>
+              <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;margin-top:10px;margin-bottom:0;">✅ No spam. Unsubscribe anytime.</p>
+            </div>
+
+            <!-- About the Author Card -->
+            <div class="sidebar-card">
+              <h4>✍️ About the Author</h4>
+              <div class="author-card-content">
+                <div class="author-card-avatar">JD</div>
+                <div class="author-card-name">James Dawson</div>
+                <div class="author-card-role">Senior Electronics Reviewer</div>
+                <p class="author-card-bio">James has tested over 300 consumer electronics products across 5 years. He specializes in audio gear, wearables, and home tech — always looking for the best value for money.</p>
+                <div style="display:flex;gap:8px;justify-content:center;margin-top:16px;">
+                  <a href="https://twitter.com" target="_blank" rel="noopener" class="social-btn" aria-label="Twitter" style="font-size:14px;">🐦</a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram" style="font-size:14px;">📸</a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn" style="font-size:14px;">💼</a>
+                </div>
+              </div>
+            </div>
+
+          </aside><!-- end blog-sidebar -->
+
+        </div><!-- end blog-page-layout -->
+      </div>
+    </section>
+
+    <!-- ====== NEWSLETTER SECTION ====== -->
+    <section class="section-pad newsletter-section" id="newsletter" aria-labelledby="newsletter-heading">
+      <div class="container">
+        <div class="newsletter-inner">
+          <div class="section-tag" style="margin:0 auto 16px;">📧 Stay in the Loop</div>
+          <h2 id="newsletter-heading">Get Exclusive Deals in Your Inbox</h2>
+          <p>Join 100,000+ smart shoppers who get our weekly deal roundup, buying guides, and limited-time offers.</p>
+          <form class="newsletter-form" id="newsletter-form" aria-label="Newsletter subscription">
+            <input type="email" class="newsletter-input" id="newsletter-email"
+                   placeholder="Enter your email address…" required
+                   aria-label="Email address"/>
+            <button type="submit" class="btn btn-primary" id="newsletter-submit">Subscribe Free</button>
+          </form>
+          <div class="newsletter-perks">
+            <span class="newsletter-perk"><span class="icon">✅</span> No spam, ever</span>
+            <span class="newsletter-perk"><span class="icon">🔓</span> Unsubscribe anytime</span>
+            <span class="newsletter-perk"><span class="icon">🎁</span> Exclusive discounts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">✨</div>
+            <span class="logo-text" style="color:white;">Believe<span>Yourself</span></span>
+          </a>
+          <p>Your trusted guide for finding the best deals on Amazon and AliExpress. Expert reviews, real comparisons, and honest recommendations for shoppers in the USA, UK, Canada & Europe.</p>
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">📘</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="social-btn" aria-label="Twitter/X">🐦</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">📸</a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="social-btn" aria-label="Pinterest">📌</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">▶️</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">🎵</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <nav class="footer-links" aria-label="Quick links">
+            <a href="index.html">Home</a>
+            <a href="products.html">All Deals</a>
+            <a href="comparison.html">Compare Products</a>
+            <a href="blog.html">Blog</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <nav class="footer-links" aria-label="Product categories">
+            <a href="category.html?cat=Electronics">💻 Electronics</a>
+            <a href="category.html?cat=Home & Kitchen">🏠 Home & Kitchen</a>
+            <a href="category.html?cat=Fashion">👗 Fashion</a>
+            <a href="category.html?cat=Beauty">💄 Beauty</a>
+            <a href="category.html?cat=Gadgets">⌚ Gadgets</a>
+            <a href="category.html?cat=Pets">🐾 Pets</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <nav class="footer-links" aria-label="Legal pages">
+            <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="disclaimer.html">Disclaimer</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-bottom-text">© 2025 Believe Yourself. All rights reserved. Affiliate links on this site earn us a commission at no extra cost to you.</p>
+        <div class="footer-bottom-links">
+          <a href="privacy-policy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="affiliate-disclosure.html">Disclosure</a>
+          <a href="sitemap.html">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top">↑</a>
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Category filter logic
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const blogCards = document.querySelectorAll('#blog-grid .blog-card');
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        // Update active pill
+        filterPills.forEach(p => {
+          p.classList.remove('active');
+          p.setAttribute('aria-selected', 'false');
+        });
+        pill.classList.add('active');
+        pill.setAttribute('aria-selected', 'true');
+
+        const filter = pill.dataset.filter;
+
+        blogCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+            card.style.animation = 'fadeInUp 0.4s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Sidebar newsletter
+    document.getElementById('sidebar-newsletter').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button');
+      btn.textContent = '✅ Subscribed!';
+      btn.disabled = true;
+    });
+  </script>
+</body>
+</html>
