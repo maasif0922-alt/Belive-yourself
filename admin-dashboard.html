@@ -435,7 +435,7 @@
               <span>Total Revenue</span>
               <div class="stat-icon icon-green">💰</div>
             </div>
-            <div class="stat-value">$0.00</div>
+            <div class="stat-value" id="total-revenue">$0.00</div>
             <div class="stat-trend trend-up">0% vs yesterday</div>
           </div>
           
@@ -444,17 +444,17 @@
               <span>Active Stores</span>
               <div class="stat-icon icon-orange">🏪</div>
             </div>
-            <div class="stat-value">0</div>
+            <div class="stat-value" id="total-stores">0</div>
             <div class="stat-trend trend-up">0 new today</div>
           </div>
           
           <div class="stat-card">
             <div class="stat-header">
-              <span>Active Subscriptions</span>
-              <div class="stat-icon icon-purple">💎</div>
+              <span>Total Products</span>
+              <div class="stat-icon icon-purple">📦</div>
             </div>
-            <div class="stat-value">0</div>
-            <div class="stat-trend trend-up">0 upgrades today</div>
+            <div class="stat-value" id="total-products">0</div>
+            <div class="stat-trend trend-up">Products in DB</div>
           </div>
         </div>
 
@@ -487,7 +487,9 @@
               <h2 class="panel-title">🔔 Recent Activity</h2>
             </div>
             <div class="panel-body">
-              <ul class="notification-list"><li class="notif-item"><div class="notif-content"><p>No recent activity.</p></div></li></ul>
+              <ul class="notification-list" id="notifications-list">
+                <li class="notif-item"><div class="notif-content"><p>No recent activity.</p></div></li>
+              </ul>
             </div>
           </div>
           
@@ -496,5 +498,6 @@
     </main>
   </div>
   
+  <script type="module" src="js/admin-dashboard.js"></script>
 </body>
 </html>

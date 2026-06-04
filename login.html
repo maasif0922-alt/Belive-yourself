@@ -193,7 +193,7 @@
     <h1 class="auth-title">Welcome Back</h1>
     <p class="auth-subtitle">Login to manage your dropshipping store</p>
     
-    <form action="dashboard.html" method="GET">
+    <form id="login-form">
       <div class="form-group">
         <label class="form-label" for="email">Email Address</label>
         <input class="form-control" type="email" id="email" placeholder="hello@example.com" required/>
@@ -219,5 +219,18 @@
     </div>
   </div>
 
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      
+      if(email === 'admin123@gmail.com' && password === 'mama321') {
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        window.location.href = 'dashboard.html';
+      }
+    });
+  </script>
 </body>
 </html>

@@ -70,6 +70,9 @@ function renderProductCard(product) {
           <button class="card-action-btn wishlist-btn" aria-label="Add to wishlist" title="Wishlist">
             <span class="icon">🤍</span>
           </button>
+          <button class="card-action-btn share-btn" aria-label="Share product" title="Share" data-url="${window.location.origin}/product-review.html?id=${product.id}">
+            <span class="icon">📤</span>
+          </button>
           <a href="product-review.html?id=${product.id}" class="card-action-btn" aria-label="Quick view" title="View Review">👁️</a>
         </div>
       </div>
@@ -286,6 +289,29 @@ function initWishlistButtons(container) {
           icon.textContent = '🤍';
           if (window.showToast) window.showToast('Removed from wishlist.');
         }
+      }
+    });
+  });
+  
+  container.querySelectorAll('.share-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const url = btn.getAttribute('data-url');
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Check out this deal!',
+            url: url
+          });
+        } catch (err) {
+          console.error('Error sharing:', err);
+        }
+      } else {
+        // Fallback to copy link
+        navigator.clipboard.writeText(url).then(() => {
+          if (window.showToast) window.showToast('Link copied to clipboard!');
+          else alert('Link copied to clipboard!');
+        });
       }
     });
   });

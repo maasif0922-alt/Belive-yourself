@@ -306,7 +306,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-title">Active Products</div>
-            <div class="stat-value">0</div>
+            <div class="stat-value" id="active-products">0</div>
             <div class="stat-trend" style="color:var(--color-text-muted);">Manage Products →</div>
             <div style="position:absolute; right:-20px; bottom:-20px; font-size:100px; opacity:0.03; z-index:0;">📦</div>
           </div>
@@ -332,7 +332,9 @@
                     <th>Status</th>
                   </tr>
                 </thead>
-                <tbody><tr><td colspan="5" style="text-align:center; padding: 30px; color: #94a3b8;">No recent sales yet. Start adding products to earn!</td></tr></tbody>
+                <tbody id="recent-sales-tbody">
+                  <tr><td colspan="5" style="text-align:center; padding: 30px; color: #94a3b8;">No recent sales yet. Start adding products to earn!</td></tr>
+                </tbody>
               </table>
             </div>
           </div>
@@ -380,5 +382,6 @@
 
   </div>
   
+  <script type="module" src="js/user-dashboard.js"></script>
 </body>
 </html>
