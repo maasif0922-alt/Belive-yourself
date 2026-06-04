@@ -239,7 +239,7 @@
         </a>
       </div>
       <nav class="sidebar-nav">
-        <a href="dashboard.html" class="sidebar-link active">
+        <a href="dashboard.html" class="sidebar-link">
           <span class="icon">📊</span> Overview
         </a>
         <a href="store-builder.html" class="sidebar-link">
@@ -248,7 +248,7 @@
         <a href="user-add-product.html" class="sidebar-link">
           <span class="icon">📦</span> Add Product
         </a>
-        <a href="analytics.html" class="sidebar-link">
+        <a href="analytics.html" class="sidebar-link active">
           <span class="icon">📈</span> Analytics
         </a>
         <a href="payouts.html" class="sidebar-link">
@@ -284,130 +284,16 @@
 
       <!-- Page Content -->
       <div class="content-area">
-        <h1 class="page-title">Welcome back, John! 👋</h1>
-        
-        <!-- Stats -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-title">Total Earnings</div>
-            <div class="stat-value">$1,245.50</div>
-            <div class="stat-trend trend-up">↑ 12.5% from last month</div>
-            <div style="position:absolute; right:-20px; bottom:-20px; font-size:100px; opacity:0.03; z-index:0;">💰</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-title">Store Views</div>
-            <div class="stat-value">3,492</div>
-            <div class="stat-trend trend-up">↑ 5.2% from last month</div>
-            <div style="position:absolute; right:-20px; bottom:-20px; font-size:100px; opacity:0.03; z-index:0;">👁️</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-title">Link Clicks</div>
-            <div class="stat-value">841</div>
-            <div class="stat-trend trend-up">↑ 18.1% from last month</div>
-            <div style="position:absolute; right:-20px; bottom:-20px; font-size:100px; opacity:0.03; z-index:0;">🖱️</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-title">Active Products</div>
-            <div class="stat-value">24</div>
-            <div class="stat-trend" style="color:var(--color-text-muted);">Manage Products →</div>
-            <div style="position:absolute; right:-20px; bottom:-20px; font-size:100px; opacity:0.03; z-index:0;">📦</div>
-          </div>
-        </div>
-
-        <!-- Two column layout for panels -->
-        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:32px;">
-          
-          <!-- Recent Activity -->
-          <div class="dashboard-panel">
-            <div class="panel-header">
-              <h3>Recent Sales Activity</h3>
-              <button class="btn btn-outline btn-sm">Export CSV</button>
-            </div>
-            <div class="table-container">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Source</th>
-                    <th>Date</th>
-                    <th>Commission</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Sony WH-1000XM5</td>
-                    <td>Amazon</td>
-                    <td>Today, 10:23 AM</td>
-                    <td><strong style="color:var(--color-navy);">$14.00</strong></td>
-                    <td><span class="status-badge status-success">Paid</span></td>
-                  </tr>
-                  <tr>
-                    <td>Anker Soundcore Q45</td>
-                    <td>AliExpress</td>
-                    <td>Yesterday</td>
-                    <td><strong style="color:var(--color-navy);">$4.50</strong></td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                  </tr>
-                  <tr>
-                    <td>Keychron K2 Keyboard</td>
-                    <td>Amazon</td>
-                    <td>May 26, 2025</td>
-                    <td><strong style="color:var(--color-navy);">$6.20</strong></td>
-                    <td><span class="status-badge status-success">Paid</span></td>
-                  </tr>
-                  <tr>
-                    <td>Ninja AF101 Air Fryer</td>
-                    <td>Amazon</td>
-                    <td>May 25, 2025</td>
-                    <td><strong style="color:var(--color-navy);">$8.99</strong></td>
-                    <td><span class="status-badge status-success">Paid</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Quick Actions / Setup Guide -->
-          <div class="dashboard-panel">
-            <div class="panel-header">
-              <h3>Setup Guide</h3>
-            </div>
-            <div style="padding:24px;">
-              <div style="display:flex; align-items:flex-start; gap:16px; margin-bottom:20px;">
-                <div style="width:24px;height:24px;border-radius:50%;background:#10b981;color:white;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">✓</div>
-                <div>
-                  <h4 style="margin:0 0 4px;font-size:0.95rem;">Create Account</h4>
-                  <p style="margin:0;font-size:0.85rem;color:var(--color-text-muted);">You're all set up.</p>
-                </div>
-              </div>
-              <div style="display:flex; align-items:flex-start; gap:16px; margin-bottom:20px;">
-                <div style="width:24px;height:24px;border-radius:50%;background:var(--color-bg-alt);border:1px solid var(--color-border);color:var(--color-text-muted);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">2</div>
-                <div>
-                  <h4 style="margin:0 0 4px;font-size:0.95rem;">Customize Storefront</h4>
-                  <p style="margin:0;font-size:0.85rem;color:var(--color-text-muted);">Add your logo and choose a theme.</p>
-                  <a href="store-builder.html" style="font-size:0.85rem;color:var(--color-orange);font-weight:600;display:inline-block;margin-top:4px;">Customize →</a>
-                </div>
-              </div>
-              <div style="display:flex; align-items:flex-start; gap:16px;">
-                <div style="width:24px;height:24px;border-radius:50%;background:var(--color-bg-alt);border:1px solid var(--color-border);color:var(--color-text-muted);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">3</div>
-                <div>
-                  <h4 style="margin:0 0 4px;font-size:0.95rem;">Add Products</h4>
-                  <p style="margin:0;font-size:0.85rem;color:var(--color-text-muted);">Start adding deals to your store.</p>
-                  <a href="user-add-product.html" style="font-size:0.85rem;color:var(--color-orange);font-weight:600;display:inline-block;margin-top:4px;">Add Now →</a>
-                </div>
-              </div>
-            </div>
-            
-            <div style="padding:20px; background:var(--gradient-blue); border-top:1px solid rgba(255,255,255,0.1);">
-              <h4 style="color:white; margin:0 0 8px;">Pro Tip 💡</h4>
-              <p style="color:rgba(255,255,255,0.8); font-size:0.85rem; margin:0;">Stores with at least 20 products get 3x more traffic. Keep adding products daily!</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </main>
+  <h1 class="page-title">Analytics Overview</h1>
+  <div class="dashboard-panel">
+    <div class="panel-header"><h3>Traffic Sources</h3></div>
+    <div style="padding:40px; text-align:center; color:var(--color-text-muted);">
+      <div style="font-size:3rem;margin-bottom:16px;">📊</div>
+      <p>Analytics module is currently collecting data. Charts will appear here soon.</p>
+    </div>
+  </div>
+</div>
+</main>
 
   </div>
   <script type="module">

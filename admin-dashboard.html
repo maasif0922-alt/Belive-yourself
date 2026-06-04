@@ -368,8 +368,8 @@
         <a href="#" class="admin-link">
           <span class="icon">⚙️</span> Settings
         </a>
-        <a href="index.html" class="admin-link" style="margin-top:20px; color:#f87171;">
-          <span class="icon">🚪</span> Exit to Frontend
+        <a href="#" id="logout-btn" class="admin-link" style="margin-top:20px; color:#f87171;">
+          <span class="icon">🚪</span> Logout
         </a>
       </div>
     </aside>
@@ -550,5 +550,10 @@
       </div>
     </main>
   </div>
+  <script type="module">
+    import { requireAuth, setupLogoutButton } from './js/auth.js';
+    requireAuth();
+    setupLogoutButton();
+  </script>
 </body>
 </html>

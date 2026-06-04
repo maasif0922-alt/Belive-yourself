@@ -122,6 +122,10 @@
         <div class="admin-nav-group">Content & Marketing</div>
         <a href="admin-blog.html" class="admin-link"><span class="icon">📝</span> Blog Editor</a>
         <a href="admin-ads.html" class="admin-link"><span class="icon">📢</span> Ads & Promotions</a>
+        <div class="admin-nav-group">System</div>
+        <a href="#" id="logout-btn" class="admin-link" style="margin-top:20px; color:#f87171;">
+          <span class="icon">🚪</span> Logout
+        </a>
       </div>
     </aside>
 
@@ -138,23 +142,20 @@
           <div class="panel">
             <div class="panel-header"><h2 class="panel-title">Product Details</h2></div>
             <div class="panel-body">
-              <form>
+              <form id="add-product-form">
                 <div class="form-group">
                   <label class="form-label">Product Title</label>
-                  <input type="text" class="form-control" placeholder="e.g. Sony WH-1000XM5 Wireless Headphones" />
+                  <input type="text" id="prod-title" class="form-control" placeholder="e.g. Sony WH-1000XM5 Wireless Headphones" required />
                 </div>
                 
                 <div class="form-group">
                   <label class="form-label">Product Source</label>
                   <div class="source-radio">
                     <label class="radio-label">
-                      <input type="radio" name="source" checked /> 📦 Amazon
+                      <input type="radio" name="source" value="amazon" checked /> 📦 Amazon
                     </label>
                     <label class="radio-label">
-                      <input type="radio" name="source" /> 🏷️ AliExpress
-                    </label>
-                    <label class="radio-label">
-                      <input type="radio" name="source" /> 🚚 Custom Dropship
+                      <input type="radio" name="source" value="aliexpress" /> 🏷️ AliExpress
                     </label>
                   </div>
                 </div>
@@ -162,45 +163,49 @@
                 <div class="form-row">
                   <div class="form-group">
                     <label class="form-label">Category</label>
-                    <select class="form-control">
-                      <option>Electronics</option>
-                      <option>Home & Kitchen</option>
-                      <option>Fashion</option>
-                      <option>Gadgets</option>
+                    <select id="prod-category" class="form-control">
+                      <option value="Electronics">Electronics</option>
+                      <option value="Home & Kitchen">Home & Kitchen</option>
+                      <option value="Fashion">Fashion</option>
+                      <option value="Gadgets">Gadgets</option>
+                      <option value="Beauty">Beauty</option>
+                      <option value="Sports & Fitness">Sports & Fitness</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label class="form-label">Star Rating (1-5)</label>
-                    <input type="number" class="form-control" step="0.1" max="5" min="1" placeholder="4.8" />
+                    <input type="number" id="prod-rating" class="form-control" step="0.1" max="5" min="1" placeholder="4.8" required />
                   </div>
                 </div>
 
                 <div class="form-row">
                   <div class="form-group">
                     <label class="form-label">New Price ($)</label>
-                    <input type="text" class="form-control" placeholder="279.99" style="color:#ef4444; font-weight:bold;" />
+                    <input type="number" step="0.01" id="prod-price" class="form-control" placeholder="279.99" style="color:#ef4444; font-weight:bold;" required />
                   </div>
                   <div class="form-group">
                     <label class="form-label">Old Price ($) - Optional</label>
-                    <input type="text" class="form-control" placeholder="349.99" />
+                    <input type="number" step="0.01" id="prod-old-price" class="form-control" placeholder="349.99" />
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="form-label">Affiliate URL (Your Referral Link)</label>
-                  <input type="url" class="form-control" placeholder="https://amazon.com/dp/B09...?tag=yourid-20" />
+                  <input type="url" id="prod-url" class="form-control" placeholder="https://amazon.com/dp/B09...?tag=yourid-20" required />
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label">Product Image</label>
-                  <div class="upload-box">
-                    <div class="upload-icon">📸</div>
-                    <div style="font-weight:600;color:var(--admin-dark);">Click to upload or drag image here</div>
-                    <div style="font-size:0.8rem;color:#64748b;margin-top:4px;">JPG, PNG or WEBP (Max 2MB)</div>
-                  </div>
+                  <label class="form-label">Product Image URL</label>
+                  <input type="url" id="prod-image" class="form-control" placeholder="https://images.unsplash.com/..." required />
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Description</label>
+                  <textarea id="prod-desc" class="form-control" placeholder="Short product description..." rows="3" required></textarea>
                 </div>
 
-                <button type="button" class="btn btn-primary" style="width:100%; padding:14px; font-size:1.1rem; margin-top:10px;">💾 Publish Product to Store</button>
+                <button type="submit" class="btn btn-primary" style="width:100%; padding:14px; font-size:1.1rem; margin-top:10px;" id="save-product-btn">💾 Publish Product to Store</button>
+                <div id="form-msg" style="margin-top: 10px; font-weight: bold; text-align: center;"></div>
               </form>
             </div>
           </div>
@@ -231,5 +236,11 @@
       </div>
     </main>
   </div>
+  <script type="module" src="js/admin-products.js"></script>
+  <script type="module">
+    import { requireAuth, setupLogoutButton } from './js/auth.js';
+    requireAuth();
+    setupLogoutButton();
+  </script>
 </body>
 </html>

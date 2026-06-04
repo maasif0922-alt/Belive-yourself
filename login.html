@@ -193,7 +193,8 @@
     <h1 class="auth-title">Welcome Back</h1>
     <p class="auth-subtitle">Login to manage your dropshipping store</p>
     
-    <form action="dashboard.html" method="GET">
+    <form id="login-form">
+      <p id="error-message" style="color: #ff6b35; display: none; margin-bottom: 15px;"></p>
       <div class="form-group">
         <label class="form-label" for="email">Email Address</label>
         <input class="form-control" type="email" id="email" placeholder="hello@example.com" required/>
@@ -219,5 +220,6 @@
     </div>
   </div>
 
+  <script type="module" src="js/auth.js"></script>
 </body>
 </html>
