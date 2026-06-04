@@ -103,6 +103,28 @@
     .old-price { text-decoration: line-through; color: #94a3b8; font-size: 0.9rem; }
     
     .btn-action { display: block; width: 100%; text-align: center; padding: 12px; background: var(--gradient-orange); color: white; border-radius: 8px; font-weight: 700; text-decoration: none; }
+  
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+      .admin-main {
+        margin-left: 0;
+      }
+      .mobile-toggle {
+        display: block !important;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -123,7 +145,7 @@
         <a href="admin-blog.html" class="admin-link"><span class="icon">📝</span> Blog Editor</a>
         <a href="admin-ads.html" class="admin-link"><span class="icon">📢</span> Ads & Promotions</a>
         <div class="admin-nav-group">System</div>
-        <a href="#" id="logout-btn" class="admin-link" style="margin-top:20px; color:#f87171;">
+        <a href="login.html"  class="admin-link" style="margin-top:20px; color:#f87171;">
           <span class="icon">🚪</span> Logout
         </a>
       </div>
