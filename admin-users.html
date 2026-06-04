@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Users & Stores — Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* Admin Global Layout */
+    :root {
+      --admin-sidebar: 280px;
+      --admin-bg: #f1f5f9;
+      --admin-surface: #ffffff;
+      --admin-text: #334155;
+      --admin-primary: #f97316;
+      --admin-dark: #0f172a;
+    }
+    body { background: var(--admin-bg); color: var(--admin-text); font-family: var(--font-body); margin: 0; padding: 0; }
+    .admin-layout { display: flex; min-height: 100vh; }
+    .admin-sidebar { width: var(--admin-sidebar); background: var(--admin-dark); color: white; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; }
+    .admin-brand { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .admin-brand-icon { width: 40px; height: 40px; background: var(--gradient-orange); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .admin-brand-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: white; }
+    .admin-nav { padding: 20px 12px; flex: 1; overflow-y: auto; }
+    .admin-nav-group { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4); margin: 20px 0 10px 12px; font-weight: 600; }
+    .admin-link { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.2s; margin-bottom: 4px; }
+    .admin-link:hover { background: rgba(255,255,255,0.05); color: white; }
+    .admin-link.active { background: var(--admin-primary); color: white; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3); }
+    .admin-link .icon { font-size: 1.2rem; width: 24px; text-align: center; }
+    
+    .admin-main { flex: 1; margin-left: var(--admin-sidebar); display: flex; flex-direction: column; }
+    .admin-header { height: 70px; background: var(--admin-surface); border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; position: sticky; top: 0; z-index: 900; }
+    .admin-content { padding: 32px; }
+    .page-title { font-family: var(--font-heading); font-size: 1.8rem; color: var(--admin-dark); margin-bottom: 24px; font-weight: 700; }
+
+    .panel { background: var(--admin-surface); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 24px; }
+    
+    .admin-table { width: 100%; border-collapse: collapse; }
+    .admin-table th, .admin-table td { padding: 16px 24px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .admin-table th { background: #f8fafc; font-size: 0.8rem; text-transform: uppercase; color: #64748b; }
+    .admin-table tr:hover { background: #f8fafc; }
+    
+    .user-info { display: flex; align-items: center; gap: 12px; }
+    .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--admin-dark); }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="admin-dashboard.html" class="admin-brand">
+        <div class="admin-brand-icon">✨</div>
+        <div class="admin-brand-text">Master<span>Admin</span></div>
+      </a>
+      <div class="admin-nav">
+        <div class="admin-nav-group">Main Menu</div>
+        <a href="admin-dashboard.html" class="admin-link"><span class="icon">📊</span> Dashboard</a>
+        <div class="admin-nav-group">Platform Management</div>
+        <a href="admin-users.html" class="admin-link active"><span class="icon">👥</span> Users & Stores</a>
+        <a href="admin-products.html" class="admin-link"><span class="icon">📦</span> Products</a>
+        <a href="admin-subscriptions.html" class="admin-link"><span class="icon">💎</span> Subscriptions</a>
+        <div class="admin-nav-group">Content & Marketing</div>
+        <a href="admin-blog.html" class="admin-link"><span class="icon">📝</span> Blog Editor</a>
+        <a href="admin-ads.html" class="admin-link"><span class="icon">📢</span> Ads & Promotions</a>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div style="font-weight:600; color:var(--admin-dark);">User & Store Management</div>
+      </header>
+
+      <div class="admin-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+          <h1 class="page-title" style="margin:0;">Registered Users & Stores</h1>
+          <div style="display:flex; gap:10px;">
+            <input type="text" placeholder="Search by name, email..." style="padding:10px; border-radius:8px; border:1px solid #e2e8f0;" />
+            <button class="btn btn-primary">Search</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>User Details</th>
+                <th>Store Name</th>
+                <th>Registration Date</th>
+                <th>Subscription Plan</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="user-info">
+                    <div class="user-avatar" style="background:var(--gradient-orange);color:white;">JD</div>
+                    <div>
+                      <div style="font-weight:600;color:var(--admin-dark);">John Doe</div>
+                      <div style="font-size:0.8rem;color:#64748b;">john@example.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>JD Electronics</strong></td>
+                <td>June 4, 2026</td>
+                <td><span style="background:#f1f5f9;color:#475569;padding:4px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;">Basic</span></td>
+                <td>
+                  <button class="btn btn-outline btn-sm">View Store</button>
+                  <button class="btn btn-outline btn-sm" style="color:#ef4444;border-color:#fca5a5;">Suspend</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-info">
+                    <div class="user-avatar">AR</div>
+                    <div>
+                      <div style="font-weight:600;color:var(--admin-dark);">Ali Raza</div>
+                      <div style="font-size:0.8rem;color:#64748b;">ali.raza@email.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>Tech Elite</strong></td>
+                <td>May 20, 2026</td>
+                <td><span style="background:#fef08a;color:#854d0e;padding:4px 8px;border-radius:12px;font-size:0.75rem;font-weight:700;">VIP ($100)</span></td>
+                <td>
+                  <button class="btn btn-outline btn-sm">View Store</button>
+                  <button class="btn btn-outline btn-sm" style="color:#ef4444;border-color:#fca5a5;">Suspend</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>

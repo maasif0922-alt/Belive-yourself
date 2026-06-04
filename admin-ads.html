@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ads & Promotions — Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* Admin Global Layout (Same as Dashboard) */
+    :root {
+      --admin-sidebar: 280px;
+      --admin-bg: #f1f5f9;
+      --admin-surface: #ffffff;
+      --admin-text: #334155;
+      --admin-primary: #f97316;
+      --admin-dark: #0f172a;
+    }
+    body { background: var(--admin-bg); color: var(--admin-text); font-family: var(--font-body); margin: 0; padding: 0; }
+    .admin-layout { display: flex; min-height: 100vh; }
+    .admin-sidebar { width: var(--admin-sidebar); background: var(--admin-dark); color: white; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; }
+    .admin-brand { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .admin-brand-icon { width: 40px; height: 40px; background: var(--gradient-orange); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .admin-brand-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: white; }
+    .admin-nav { padding: 20px 12px; flex: 1; overflow-y: auto; }
+    .admin-nav-group { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4); margin: 20px 0 10px 12px; font-weight: 600; }
+    .admin-link { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.2s; margin-bottom: 4px; }
+    .admin-link:hover { background: rgba(255,255,255,0.05); color: white; }
+    .admin-link.active { background: var(--admin-primary); color: white; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3); }
+    .admin-link .icon { font-size: 1.2rem; width: 24px; text-align: center; }
+    
+    .admin-main { flex: 1; margin-left: var(--admin-sidebar); display: flex; flex-direction: column; }
+    .admin-header { height: 70px; background: var(--admin-surface); border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; position: sticky; top: 0; z-index: 900; }
+    .admin-content { padding: 32px; }
+    .page-title { font-family: var(--font-heading); font-size: 1.8rem; color: var(--admin-dark); margin-bottom: 24px; font-weight: 700; }
+
+    /* Ads Layout */
+    .ads-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+    }
+    .panel {
+      background: var(--admin-surface);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    .panel-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .panel-title { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; color: var(--admin-dark); margin: 0; }
+    
+    .admin-table { width: 100%; border-collapse: collapse; }
+    .admin-table th, .admin-table td { padding: 16px 24px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .admin-table th { background: #f8fafc; font-size: 0.8rem; text-transform: uppercase; color: #64748b; }
+    
+    .status-badge { padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .status-active { background: #dcfce7; color: #16a34a; }
+    .status-pending { background: #fef08a; color: #ca8a04; }
+    
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--admin-dark); }
+    .form-control { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: var(--font-body); }
+    .form-control:focus { outline: none; border-color: var(--admin-primary); }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <a href="admin-dashboard.html" class="admin-brand">
+        <div class="admin-brand-icon">✨</div>
+        <div class="admin-brand-text">Master<span>Admin</span></div>
+      </a>
+      
+      <div class="admin-nav">
+        <div class="admin-nav-group">Main Menu</div>
+        <a href="admin-dashboard.html" class="admin-link">
+          <span class="icon">📊</span> Dashboard
+        </a>
+        
+        <div class="admin-nav-group">Platform Management</div>
+        <a href="admin-users.html" class="admin-link">
+          <span class="icon">👥</span> Users & Stores
+        </a>
+        <a href="admin-products.html" class="admin-link">
+          <span class="icon">📦</span> Products
+        </a>
+        <a href="admin-subscriptions.html" class="admin-link">
+          <span class="icon">💎</span> Subscriptions
+        </a>
+        
+        <div class="admin-nav-group">Content & Marketing</div>
+        <a href="admin-blog.html" class="admin-link">
+          <span class="icon">📝</span> Blog Editor
+        </a>
+        <a href="admin-ads.html" class="admin-link active">
+          <span class="icon">📢</span> Ads & Promotions
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <div style="font-weight:600; color:var(--admin-dark);">Ads & Promotions Manager</div>
+      </header>
+
+      <div class="admin-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+          <h1 class="page-title" style="margin:0;">Manage Advertisements</h1>
+          <button class="btn btn-primary">+ Create Ad Campaign</button>
+        </div>
+        
+        <div class="ads-grid">
+          
+          <!-- Active Campaigns -->
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Active Campaigns & Guest Posts</h2>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Client / Campaign</th>
+                  <th>Placement</th>
+                  <th>Clicks</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Shopify Partner Ad</strong><br/>
+                    <span style="font-size:0.8rem;color:#64748b;">Banner Ad</span>
+                  </td>
+                  <td>Homepage Header</td>
+                  <td>1,245</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td><button class="btn btn-outline btn-sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Guest Post: Top SEO Tools</strong><br/>
+                    <span style="font-size:0.8rem;color:#64748b;">Sponsored Link</span>
+                  </td>
+                  <td>Blog Sidebar</td>
+                  <td>342</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td><button class="btn btn-outline btn-sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Custom Product Promotion</strong><br/>
+                    <span style="font-size:0.8rem;color:#64748b;">AliExpress Seller</span>
+                  </td>
+                  <td>Search Results Top</td>
+                  <td>0</td>
+                  <td><span class="status-badge status-pending">Pending Review</span></td>
+                  <td><button class="btn btn-primary btn-sm">Approve</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Quick Add / Edit -->
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title">New Ad Placement</h2>
+            </div>
+            <div style="padding:24px;">
+              <div class="form-group">
+                <label class="form-label">Client Name / Sponsor</label>
+                <input type="text" class="form-control" placeholder="e.g. AliExpress Vendor" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Placement Area</label>
+                <select class="form-control">
+                  <option>Homepage Top Banner</option>
+                  <option>Sidebar Ad</option>
+                  <option>In-Article Sponsored Link</option>
+                  <option>Popup Ad</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Target URL</label>
+                <input type="url" class="form-control" placeholder="https://" />
+              </div>
+              <button class="btn btn-primary" style="width:100%;">Publish Ad</button>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>
