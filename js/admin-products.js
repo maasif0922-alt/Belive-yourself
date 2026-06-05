@@ -24,10 +24,11 @@ if (addProductForm) {
     const affiliateUrl = document.getElementById('prod-url').value;
     const description = document.getElementById('prod-desc').value;
 
-    const imageFile = document.getElementById('prod-image-file').files[0];
+    const imageFiles = document.getElementById('prod-image-file').files;
     let image = document.getElementById('prod-image').value;
+    let imagesArray = [];
 
-    if (!imageFile && !image) {
+    if (imageFiles.length === 0 && !image) {
       formMsg.style.color = 'red';
       formMsg.textContent = 'Please provide either an image file or an image URL.';
       saveBtn.disabled = false;
@@ -35,17 +36,38 @@ if (addProductForm) {
       return;
     }
 
+    // Helper to prevent infinite hanging
+    const withTimeout = (promise, ms, message) => {
+      return Promise.race([
+        promise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error(message)), ms))
+      ]);
+    };
+
     try {
-      if (imageFile) {
+      if (imageFiles.length > 0) {
         formMsg.style.color = '#3b82f6'; // blue
-        formMsg.textContent = 'Uploading image...';
-        const storageRef = ref(storage, `products/${Date.now()}_${imageFile.name}`);
-        const snapshot = await uploadBytes(storageRef, imageFile);
-        image = await getDownloadURL(snapshot.ref);
+        formMsg.textContent = `Uploading ${imageFiles.length} image(s)...`;
+        for (let i = 0; i < imageFiles.length; i++) {
+          const file = imageFiles[i];
+          const storageRef = ref(storage, `products/${Date.now()}_${file.name}`);
+          
+          // Added timeout to prevent infinite hang
+          const snapshot = await withTimeout(
+            uploadBytes(storageRef, file), 
+            15000, 
+            "Image upload timed out. Check your Firebase Storage rules or internet connection."
+          );
+          const dlUrl = await getDownloadURL(snapshot.ref);
+          imagesArray.push(dlUrl);
+        }
+        image = imagesArray[0]; // Set primary image
+      } else if (image) {
+        imagesArray.push(image);
       }
 
       formMsg.style.color = '#3b82f6';
-      formMsg.textContent = 'Saving product details...';
+      formMsg.textContent = 'Saving product details to database...';
 
       const newProduct = {
         title,
@@ -56,14 +78,19 @@ if (addProductForm) {
         originalPrice,
         affiliateUrl,
         image,
+        images: imagesArray,
         description,
-        reviews: Math.floor(Math.random() * 500) + 10, // random dummy reviews count
+        reviews: Math.floor(Math.random() * 500) + 10,
         badges: ["new"],
         featured: false,
         createdAt: serverTimestamp()
       };
 
-      await addDoc(collection(db, "products"), newProduct);
+      await withTimeout(
+        addDoc(collection(db, "products"), newProduct),
+        15000,
+        "Database save timed out. Check your Firestore rules or internet connection."
+      );
       formMsg.style.color = 'green';
       formMsg.textContent = 'Product successfully published!';
       addProductForm.reset();
@@ -75,7 +102,7 @@ if (addProductForm) {
     } catch (error) {
       console.error("Error adding product: ", error);
       formMsg.style.color = 'red';
-      formMsg.textContent = 'Error saving product. Please try again.';
+      formMsg.textContent = 'Error saving product: ' + error.message;
     } finally {
       saveBtn.disabled = false;
       saveBtn.textContent = '💾 Publish Product to Store';
