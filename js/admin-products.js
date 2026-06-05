@@ -1,5 +1,6 @@
-import { db } from './firebase-config.js';
+import { db, storage } from './firebase-config.js';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
 const addProductForm = document.getElementById('add-product-form');
 const formMsg = document.getElementById('form-msg');
@@ -21,26 +22,47 @@ if (addProductForm) {
     const oldPriceStr = document.getElementById('prod-old-price').value;
     const originalPrice = oldPriceStr ? parseFloat(oldPriceStr) : price;
     const affiliateUrl = document.getElementById('prod-url').value;
-    const image = document.getElementById('prod-image').value;
     const description = document.getElementById('prod-desc').value;
 
-    const newProduct = {
-      title,
-      source,
-      category,
-      rating,
-      price,
-      originalPrice,
-      affiliateUrl,
-      image,
-      description,
-      reviews: Math.floor(Math.random() * 500) + 10, // random dummy reviews count
-      badges: ["new"],
-      featured: false,
-      createdAt: serverTimestamp()
-    };
+    const imageFile = document.getElementById('prod-image-file').files[0];
+    let image = document.getElementById('prod-image').value;
+
+    if (!imageFile && !image) {
+      formMsg.style.color = 'red';
+      formMsg.textContent = 'Please provide either an image file or an image URL.';
+      saveBtn.disabled = false;
+      saveBtn.textContent = '💾 Publish Product to Store';
+      return;
+    }
 
     try {
+      if (imageFile) {
+        formMsg.style.color = '#3b82f6'; // blue
+        formMsg.textContent = 'Uploading image...';
+        const storageRef = ref(storage, `products/${Date.now()}_${imageFile.name}`);
+        const snapshot = await uploadBytes(storageRef, imageFile);
+        image = await getDownloadURL(snapshot.ref);
+      }
+
+      formMsg.style.color = '#3b82f6';
+      formMsg.textContent = 'Saving product details...';
+
+      const newProduct = {
+        title,
+        source,
+        category,
+        rating,
+        price,
+        originalPrice,
+        affiliateUrl,
+        image,
+        description,
+        reviews: Math.floor(Math.random() * 500) + 10, // random dummy reviews count
+        badges: ["new"],
+        featured: false,
+        createdAt: serverTimestamp()
+      };
+
       await addDoc(collection(db, "products"), newProduct);
       formMsg.style.color = 'green';
       formMsg.textContent = 'Product successfully published!';
